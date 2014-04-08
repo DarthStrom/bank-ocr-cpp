@@ -16,3 +16,5 @@
 #include <map>
 #include <vector>
 #include <sstream>
+#include "boost\lexical_cast.hpp"
+#include "Ocr.h"

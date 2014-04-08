@@ -11,3 +11,8 @@
 #include "CppUnitTest.h"
 
 // TODO: reference additional headers your program requires here
+#include <map>
+#include <vector>
+#include <string>
+#include "CppUnitTest.h"
+#include "Ocr.h"

@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Ocr.h"
 
 namespace BankOCR {
 	using namespace std;
@@ -114,5 +113,13 @@ namespace BankOCR {
 			result += GetAccountNumber(entries[i]) + "\n";
 		}
 		return result.substr(0, result.length() - 1);
+	}
+
+	bool Ocr::IsValid(string accountNumber) {
+		int sum = 0;
+		for (int i = 0; i < 9; i++) {
+			sum += (9 - i) * boost::lexical_cast<int>(accountNumber[i]);
+		}
+		return sum % 11 == 0;
 	}
 }
