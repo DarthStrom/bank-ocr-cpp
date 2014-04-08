@@ -8,6 +8,8 @@ namespace BankOCR {
 		static map<string, string> Patterns;
 		static vector<string> &Split(const string &s, char delim, vector<string> &elems);
 		static vector<string> Split(const string &s, char delim);
-		static vector<string> GetDigits(string text);
+		static string GetAccountNumber(string entry);
+		static vector<string> GetDigits(string entry);
+		static vector<string> GetEntries(string text);
 	};
 }
