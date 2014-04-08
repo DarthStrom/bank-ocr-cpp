@@ -6,58 +6,91 @@ namespace BankOCR {
 
 	map<string, string> Ocr::Patterns = {
 		{
-			" _ \n"
-			"| |\n"
-			"|_|\n"
+			" _ "
+			"| |"
+			"|_|"
 			"   ", "0" },
 		{
-			"   \n"
-			"  |\n"
-			"  |\n"
+			"   "
+			"  |"
+			"  |"
 			"   ", "1" },
 		{
-			" _ \n"
-			" _|\n"
-			"|_ \n"
+			" _ "
+			" _|"
+			"|_ "
 			"   ", "2" },
 		{
-			" _ \n"
-			" _|\n"
-			" _|\n"
+			" _ "
+			" _|"
+			" _|"
 			"   ", "3" },
 		{
-			"   \n"
-			"|_|\n"
-			"  |\n"
+			"   "
+			"|_|"
+			"  |"
 			"   ", "4" },
 		{
-			" _ \n"
-			"|_ \n"
-			" _|\n"
+			" _ "
+			"|_ "
+			" _|"
 			"   ", "5" },
 		{
-			" _ \n"
-			"|_ \n"
-			"|_|\n"
+			" _ "
+			"|_ "
+			"|_|"
 			"   ", "6" },
 		{
-			" _ \n"
-			"  |\n"
-			"  |\n"
+			" _ "
+			"  |"
+			"  |"
 			"   ", "7" },
 		{
-			" _ \n"
-			"|_|\n"
-			"|_|\n"
+			" _ "
+			"|_|"
+			"|_|"
 			"   ", "8" },
 		{
-			" _ \n"
-			"|_|\n"
-			" _|\n"
+			" _ "
+			"|_|"
+			" _|"
 			"   ", "9" }
 	};
 
+	vector<string> &Ocr::Split(const string &s, char delim, vector<string> &elems) {
+		stringstream ss(s);
+		string item;
+		while (getline(ss, item, delim)) {
+			elems.push_back(item);
+		}
+		return elems;
+	}
+
+	vector<string> Ocr::Split(const string &s, char delim) {
+		vector<string> elems;
+		Split(s, delim, elems);
+		return elems;
+	}
+
+	vector<string> Ocr::GetDigits(string text) {
+		vector<string> digits;
+		vector<string> lines = Split(text, '\n');
+		for (unsigned int digitNumber = 0; digitNumber < lines[0].length(); digitNumber += 3) {
+			string digit = "";
+			for (unsigned int lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
+				digit += lines[lineNumber].substr(digitNumber, 3);
+			}
+			digits.push_back(digit);
+		}
+		return digits;
+	}
+
 	string Ocr::Convert(string text) {
-		return Patterns[text];
+		vector<string> digits = Ocr::GetDigits(text);
+		string result = "";
+		for (unsigned int i = 0; i < digits.size(); i++) {
+			result += Patterns[digits[i]];
+		}
+		return result;
 	}
 }

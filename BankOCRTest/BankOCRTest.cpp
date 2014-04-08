@@ -88,5 +88,13 @@ namespace BankOCRTest {
 				" _|\n"
 				"   "));
 		}
+
+		TEST_METHOD(ConvertsALineOfZeros) {
+			Assert::AreEqual(string("000000000"), Ocr::Convert(
+				" _  _  _  _  _  _  _  _  _ \n"
+				"| || || || || || || || || |\n"
+				"|_||_||_||_||_||_||_||_||_|\n"
+				"                           "));
+		}
 	};
 }
