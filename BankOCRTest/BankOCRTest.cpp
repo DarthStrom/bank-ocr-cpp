@@ -148,5 +148,9 @@ namespace BankOCRTest {
 			Assert::IsTrue(Ocr::IsValid("345882865"));
 		}
 
+
+		TEST_METHOD(CanDetectAnInvalidAccountNumber) {
+			Assert::IsFalse(Ocr::IsValid("987654321"));
+		}
 	};
 }
